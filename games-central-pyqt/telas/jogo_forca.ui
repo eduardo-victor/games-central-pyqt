@@ -140,6 +140,9 @@ border-radius: 6px;</string>
      <italic>true</italic>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">QPushButton{
 background-color: rgb(255, 255, 255);

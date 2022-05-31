@@ -24,6 +24,7 @@ class JogoVelha(QMainWindow):
         self.jogovelha.botao8.clicked.connect(lambda: self.clicar(self.jogovelha.botao8))
         self.jogovelha.botao9.clicked.connect(lambda: self.clicar(self.jogovelha.botao9))
         self.jogovelha.botao_reset.clicked.connect(self.resetar_jogo)
+        self.jogovelha.btn_return.clicked.connect(self.fechar_jogo)
 
         
         #Mostrar o jogo
@@ -110,6 +111,7 @@ class JogoVelha(QMainWindow):
             self.jogovelha.botao8,
             self.jogovelha.botao9,
         ]
+
         #Resetar botões
         for botao in lista_botoes2:
             botao.setText("")
@@ -122,3 +124,7 @@ class JogoVelha(QMainWindow):
 
         # Resetar o contador
         self.contador = 0
+    
+        
+    def fechar_jogo(self):
+        self.close()

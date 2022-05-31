@@ -139,18 +139,26 @@ border-radius: 5px</string>
    </property>
    <property name="font">
     <font>
-     <family>Consolas</family>
+     <family>Century Gothic</family>
      <pointsize>12</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <weight>50</weight>
+     <italic>true</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 10px</string>
+    <string notr="true">QPushButton{
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px
+}
+
+QPushButton:hover{
+	background-color: red;
+	color: white;
+}</string>
    </property>
    <property name="text">
     <string>RESET</string>
@@ -446,9 +454,9 @@ border: none;
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>370</y>
+     <y>360</y>
      <width>451</width>
-     <height>20</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -460,13 +468,49 @@ border: none;
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
+    <string notr="true">color: rgb(255, 255, 255);
+padding: 6px;</string>
    </property>
    <property name="text">
     <string>WHO'S THE WINNER?</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_return">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Century Gothic</family>
+     <pointsize>9</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px
+}
+
+QPushButton:hover{
+	background-color: red;
+	color: white;
+}
+</string>
+   </property>
+   <property name="text">
+    <string>VOLTAR</string>
    </property>
   </widget>
  </widget>

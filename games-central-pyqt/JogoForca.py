@@ -45,13 +45,30 @@ class JogoForca(QMainWindow):
         self.jogoforca.label_dica.setHidden(False)
         self.jogoforca.line_2.setHidden(False)
         self.jogoforca.btn_iniciar.setHidden(True)
+
+        self.mostrar_dica()
     
     def enviar_letra(self):
         self.variavel = self.jogoforca.insert_line.text()
-        self.jogoforca.lbl_palavra_certa.setText(self.variavel)
+        return self.variavel
 
     def sortear_palavra(self):
         self.palavras = [{"banco de dados":"mongodb", "cloudcomputing":"aws", "linguagem de programação":"ruby", "framework": "flutter"}]
-        return self.palavras[randint(0, len(self.palavras))]
+        return self.palavras[randint(0, len(self.palavras) -1)]
+    
+    def mostrar_dica(self):
+        #dica
+        self.palavra_sorted = self.sortear_palavra()
+        self.chave = list(self.palavra_sorted.keys())
+        self.escolhida = self.chave[randint(0,3)]
+        self.jogoforca.label_dica.setText(f"Dica:{self.escolhida}")
+        
+        #palavra certa
+        for i in self.palavras[0]:
+            if i == self.escolhida:
+               self.palavra_correta = self.palavras[0][i]
+
+        self.jogoforca.lbl_palavra_certa.setText("_ " * len(self.palavra_correta))
+            
     
     

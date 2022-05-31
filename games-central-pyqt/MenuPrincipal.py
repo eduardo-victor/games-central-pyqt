@@ -18,7 +18,6 @@ class MenuPrincipal(QMainWindow):
 
         #MOSTRAR MENU
         self.menu.show()
-
     
     def jogo_velha(self):
         self.game = JogoVelha()
