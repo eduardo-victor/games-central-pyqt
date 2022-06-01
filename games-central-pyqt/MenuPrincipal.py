@@ -10,7 +10,7 @@ class MenuPrincipal(QMainWindow):
         super(MenuPrincipal, self).__init__()
         
         #CARREGAR TELA
-        self.menu = uic.loadUi("telas\\tela_principal.ui")
+        self.menu = uic.loadUi('telas\\tela_principal.ui')
         
         #BOTÕES
         self.menu.botao_jogo_forca.clicked.connect(self.jogo_forca)
