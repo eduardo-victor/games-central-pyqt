@@ -4,6 +4,7 @@ from PyQt5 import uic
 import sys
 from JogoForca import JogoForca
 from JogoVelha import JogoVelha
+from JogoJokenpo import Jokenpo
 
 class MenuPrincipal(QMainWindow):
     def __init__(self):
@@ -15,6 +16,7 @@ class MenuPrincipal(QMainWindow):
         #BOTÕES
         self.menu.botao_jogo_forca.clicked.connect(self.jogo_forca)
         self.menu.botao_jogo_velha.clicked.connect(self.jogo_velha)
+        self.menu.botao_jogo_jokenpo.clicked.connect(self.jogo_jokenpo)
 
         #MOSTRAR MENU
         self.menu.show()
@@ -24,6 +26,9 @@ class MenuPrincipal(QMainWindow):
         
     def jogo_forca(self):
         self.game2 = JogoForca()
+
+    def jogo_jokenpo(self):
+        self.game3 = Jokenpo()
 
 if __name__ == "__main__":   
     app = QApplication(sys.argv)

@@ -13,6 +13,7 @@ class JogoForca(QMainWindow):
         
         #VARIAVEIS
         self.lista_errada = []
+        self.lista_acerto = []
         
         
         #CARREGAR TELA DO JOGO
@@ -22,6 +23,7 @@ class JogoForca(QMainWindow):
         #BOTÕES
         self.jogoforca.btn_insert.clicked.connect(self.chute_usuario)
         self.jogoforca.btn_iniciar.clicked.connect(self.mostrar_elementos)
+        self.jogoforca.btn_return.clicked.connect(self.lose_game)
         
         #LABELS
         self.contador = 6
@@ -44,6 +46,10 @@ class JogoForca(QMainWindow):
         self.jogoforca.line_2.setHidden(True)
         self.jogoforca.lbl_num_skull.setHidden(True)
         self.jogoforca.lbl_skull.setHidden(True)
+        self.jogoforca.lbl_morte.setHidden(True)
+        self.jogoforca.btn_return.setHidden(True)
+        self.jogoforca.txt_lose.setHidden(True)
+        self.jogoforca.lbl_win.setHidden(True)
         
     def mostrar_elementos(self):
         self.jogoforca.lbl_img.setHidden(False)
@@ -77,27 +83,62 @@ class JogoForca(QMainWindow):
         for i in self.palavras[0]:
             if i == self.escolhida:
                self.palavra_correta = self.palavras[0][i]
-               
-        self.jogoforca.lbl_palavra_certa.setText("_ " * len(self.palavra_correta))
-        
-        return self.palavra_correta        
+        self.palavra_escondida = '*' * len(self.palavra_correta)
+        self.imprimir()
 
+    def imprimir(self):
+        self.palavra_imprimir = ""
+        for letra in self.palavra_escondida:
+            self.palavra_imprimir += letra + ' '
+        self.jogoforca.lbl_palavra_certa.setText(self.palavra_imprimir)
+
+    def acertou_chute(self):
+        self.lista_secreta = list(self.palavra_escondida)
+        string_secreta = ""
+
+        for pos in range(len(self.palavra_correta)):
+            if self.chute == self.palavra_correta[pos]:
+                self.lista_secreta[pos] = self.chute
+        for pos in range(len(self.lista_secreta)):
+            string_secreta += self.lista_secreta[pos]
+        
+        self.palavra_escondida = string_secreta
+        self.imprimir()
+        self.win_game()
 
     def chute_usuario(self):
-        
-        self.letra = self.jogoforca.insert_line.text().lower()
-        
-        if self.letra in self.palavra_correta:
-            print("Letra certa")
+        self.chute = self.jogoforca.insert_line.text().lower()
+        if self.chute in self.palavra_correta:
+            self.lista_acerto.append(self.chute)
             self.jogoforca.insert_line.setText("")
+            self.acertou_chute()
         else:
-            self.lista_errada.append(self.letra)
-            self.contador -= 1
-            self.jogoforca.lbl_num_skull.setText(str(self.contador))
-            self.jogoforca.insert_line.setText("")
-            
+            if self.chute not in self.lista_errada:
+                self.lista_errada.append(self.chute)
+                self.contador -= 1
+                self.jogoforca.lbl_num_skull.setText(str(self.contador))
+                self.jogoforca.insert_line.setText("")
+            else:
+                self.jogoforca.insert_line.setText("")
+                
             for l in self.lista_errada:
                 self.jogoforca.lbl_try.setText(f"{self.lista_errada}")
-            
+
+
             if self.contador == 0:
-                self.jogoforca.setEnabled(False)
+                self.esconder_elementos
+                self.jogoforca.txt_lose.setHidden(False)
+                self.jogoforca.lbl_morte.setHidden(False)
+                self.jogoforca.btn_return.setHidden(False)
+                self.jogoforca.btn_return.setHidden(False)
+
+    def lose_game(self):
+        self.jogoforca.close()
+    
+    def win_game(self):
+        if self.palavra_escondida == self.palavra_correta:
+            self.esconder_elementos
+            self.jogoforca.txt_lose.setText(f"PARABÉNS, A PALAVRA ERA: {self.palavra_correta}")
+            self.jogoforca.txt_lose.setHidden(False)
+            self.jogoforca.lbl_win.setHidden(False)
+            self.jogoforca.btn_return.setHidden(False)
